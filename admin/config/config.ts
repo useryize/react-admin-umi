@@ -1,21 +1,19 @@
 import { defineConfig } from '@umijs/max';
-
+import defaultSettings from './defaultSettings';
 export default defineConfig({
   antd: {},
   access: {},
   model: {},
   initialState: {},
   request: {},
-  layout: {
-    title: '@umijs/max   ',
-  },
+  layout: defaultSettings,
   routes: [
     {
       path: '/',
       redirect: '/home',
     },
     {
-      name: '首页',
+      name: '首页asdasd',
       path: '/home',
       component: './Home',
     },
