@@ -1,5 +1,6 @@
 import { defineConfig } from "@umijs/max";
 import defaultSettings from "./defaultSettings";
+import routes from "./routes";
 export default defineConfig({
   antd: {},
   access: {},
@@ -7,27 +8,7 @@ export default defineConfig({
   initialState: {},
   request: {},
   layout: defaultSettings,
-  routes: [
-    {
-      path: "/",
-      redirect: "/home",
-    },
-    {
-      name: "首页asdasd",
-      path: "/home",
-      component: "./Home",
-    },
-    {
-      name: "权限演示",
-      path: "/access",
-      component: "./Access",
-    },
-    {
-      name: " CRUD 示例",
-      path: "/table",
-      component: "./Table",
-    },
-  ],
+  routes: routes,
 
   npmClient: "pnpm",
   tailwindcss: {},
