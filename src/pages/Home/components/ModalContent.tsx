@@ -38,6 +38,7 @@ export default () => {
 
   // 处理弹窗关闭
   const handleClose = () => {
+    form.resetFields(); // 关闭时强制重置表单
     setState({
       popLoading: false,
       open: false,
@@ -50,8 +51,8 @@ export default () => {
     if (state?.edit) {
       form.setFieldsValue(state?.editParams);
     }
-    return () => { }
-  }, [state?.editParams])
+    return () => form.resetFields();
+  }, [state?.edit, state?.editParams])
   return <>
     <ModalForm
       form={form}
