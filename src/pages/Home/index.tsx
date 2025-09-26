@@ -2,27 +2,37 @@ import { EllipsisOutlined, PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable, TableDropdown } from '@ant-design/pro-components';
 import { Button, Dropdown, Space, Tag } from 'antd';
-import { useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { request } from '@umijs/max';
-
-
-const columns: ProColumns[] = [
-  {
-    dataIndex: 'index',
-    valueType: 'indexBorder',
-    width: 48,
-  },
-  {
-    title: 'id',
-    dataIndex: 'title',
-    copyable: true,
-    ellipsis: true,
-    search: false,
-  },
-];
+import supabase from '@/utils/supabase';
 
 export default () => {
   const actionRef = useRef<ActionType>();
+
+  const columns: ProColumns[] = useMemo(() => ([
+    {
+      dataIndex: 'index',
+      valueType: 'indexBorder',
+      width: 48,
+    },
+    {
+      title: 'id',
+      dataIndex: 'title',
+      copyable: true,
+      ellipsis: true,
+      search: false,
+    },
+  ]), []);
+
+
+  const init = async () => {
+    const obj = await supabase.from('commodity').select('*');
+    console.error(1321465, obj)
+  }
+
+  useEffect(() => {
+    init();
+  }, [])
   return (
     <ProTable
       columns={columns}
