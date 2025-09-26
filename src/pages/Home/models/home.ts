@@ -7,6 +7,9 @@ export default () => {
   const [state, setState] = useSetState<any>({
     open: false,
     popLoading: false,
+    add: false,
+    edit: false,
+    editParams: {},
   })
   return {
     state,

@@ -1,53 +1,71 @@
 import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-components';
-import { message } from 'antd';
+import { Form, message } from 'antd';
 import { useModel } from '@umijs/max';
 import supabase from '@/utils/supabase';
+import { error } from 'console';
+import { useEffect } from 'react';
 export default () => {
+  const [form] = Form.useForm<any>();
   const { state, setState, actionRef } = useModel('Home.home');
   // 处理表单提交
-  const handleAdd = async (values: any) => {
+  const handleSubmit = async ({ name, linkUrl, desc, imageUrl }: any) => {
     try {
       setState({ popLoading: true });
-      const { error } = await supabase
-        .from('home_banner')
-        .insert({
-          name: values.name,
-          linkUrl: values.linkUrl || '',
-          desc: values.desc || '',
-          imageUrl: values.imageUrl || 0,
-        });
+      let result;
+      const params = { name, linkUrl, desc, imageUrl }
 
-      if (error) {
-        message.error('添加失败');
-        return false;
-      } else {
-        setState({ popLoading: false, open: false });
-        message.success('添加成功');
-        actionRef?.current?.reload?.();
-        return true;
+      if (state?.edit && state?.editParams?.id) {
+        result = await supabase
+          .from('home_banner')
+          .update(params)
+          .eq('id', state?.editParams?.id)
       }
+
+
+      if (state?.add && !state?.edit) {
+        result = await supabase
+          .from('home_banner')
+          .insert(params);
+      }
+
+      message?.[result?.error ? 'error' : 'success'](result?.error ? '添加失败' : '更新失败');
+      handleClose()
+      !result?.error && actionRef?.current?.reload?.();
     } catch (err) {
       console.error('捕获到异常:', err);
-      return false;
     }
   };
+
+  // 处理弹窗关闭
+  const handleClose = () => {
+    setState({
+      popLoading: false,
+      open: false,
+      edit: false,
+      add: false,
+      editParams: {}
+    });
+  };
+  useEffect(() => {
+    if (state?.edit) {
+      form.setFieldsValue(state?.editParams);
+    }
+    return () => { }
+  }, [state?.editParams])
   return <>
     <ModalForm
-      title="新建"
+      form={form}
+      title={state?.edit ? '编辑' : '新建'}
       width={600}
       open={state?.open}
-      onOpenChange={() => setState}
-      onFinish={handleAdd}
+      onFinish={handleSubmit}
       layout="horizontal"
-      labelCol={{
-        span: 6,
-      }}
-
-      wrapperCol={{
-        span: 16,
-      }}
+      labelCol={{ span: 6, }}
+      wrapperCol={{ span: 16, }}
       modalProps={{
         confirmLoading: state.popLoading,
+        onCancel: handleClose,
+        destroyOnHidden: true,
       }}
     >
       <ProFormText
