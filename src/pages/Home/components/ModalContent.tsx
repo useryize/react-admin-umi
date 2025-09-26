@@ -1,4 +1,4 @@
-import { ModalForm, ProFormText } from '@ant-design/pro-components';
+import { ModalForm, ProFormText, ProFormTextArea } from '@ant-design/pro-components';
 import { message } from 'antd';
 import { useModel } from '@umijs/max';
 import supabase from '@/utils/supabase';
@@ -69,9 +69,12 @@ export default () => {
         placeholder="请输入链接地址"
       />
 
-      <ProFormText
+      <ProFormTextArea
         name="desc"
         label="描述"
+        placeholder="请输入描述内容"
+        maxLength={200}
+        showCount
       />
 
     </ModalForm>
