@@ -14,6 +14,7 @@ export default [
     {
         name: "首页",
         path: "/home",
+        icon: 'home',
         component: "./Home",
     },
     {

@@ -19,7 +19,11 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     layout: 'top',
     contentWidth: 'Fluid',
     fixedHeader: true,
-    childrenRender: (children) => (children)
+    childrenRender: (children) => {
+      return <>
+        {children}
+      </>
+    }
   };
 };
 
