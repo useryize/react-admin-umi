@@ -9,7 +9,8 @@ export default defineConfig({
   request: {},
   layout: defaultSettings,
   routes: routes,
-
   npmClient: "pnpm",
+  // Use relative publicPath so built files can be opened from file system or served from any base path
+  publicPath: './',
   tailwindcss: {},
 });
