@@ -26,8 +26,7 @@ export default () => {
 
 
   const init = async () => {
-    const obj = await supabase.from('commodity').select('*');
-    console.error(1321465, obj)
+    const obj = await supabase.from('home_banner').select('*')
   }
 
   useEffect(() => {
