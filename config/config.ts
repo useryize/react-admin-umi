@@ -165,6 +165,6 @@ export default defineConfig({
   define: {
     'process.env.CI': process.env.CI,
   },
-  favicons: ['config/favicon.png'],
+  favicons: ['/config/favicon.ico'],
   tailwindcss: {},
 });

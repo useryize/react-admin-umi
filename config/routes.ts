@@ -19,7 +19,6 @@ export default [
     },
     {
         path: '/',
-        name: "首页",
         redirect: '/home',
     },
     {

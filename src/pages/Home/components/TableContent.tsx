@@ -5,7 +5,7 @@ import { Button, message, Popconfirm } from 'antd';
 import { useEffect, useMemo } from 'react';
 import supabase from '@/utils/supabase';
 import { useModel } from '@umijs/max';
-
+import {getGridOneData}from '../service'
 interface BannerData {
   id: string;
   name: string;
@@ -78,6 +78,9 @@ export default () => {
   ]), []);
 
 
+  const test = async () => {
+    const {} = await getGridOneData({dtDate: "2025-09-01"})
+  }
 
   return <>
     <ProTable
@@ -104,6 +107,14 @@ export default () => {
           type="primary"
         >
           新建
+        </Button>,
+        <Button
+          key="button"
+          icon={<PlusOutlined />}
+          onClick={test}
+          type="primary"
+        >
+          add
         </Button>,
       ]}
     />
