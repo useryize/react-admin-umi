@@ -18,6 +18,12 @@ export default [
         component: "./Home",
     },
     {
+        name: "首页",
+        path: "/charts",
+        icon: 'charts',
+        component: "./Charts",
+    },
+    {
         path: '/',
         redirect: '/home',
     },
