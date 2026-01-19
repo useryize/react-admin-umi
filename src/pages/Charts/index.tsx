@@ -1,3 +1,4 @@
+import DimenCenter from './DimenCenter'
 export default () => {
-  return <>1</>
+  return <DimenCenter />
 }

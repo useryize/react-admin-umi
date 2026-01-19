@@ -12,7 +12,7 @@ export async function getInitialState(): Promise<{ name: string }> {
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
     logo: 'https://img.alicdn.com/tfs/TB1YHEpwUT1gK0jSZFhXXaAtVXa-28-27.svg',
-    title: '商城后管系统',
+    title: 'umi',
     menu: {
       locale: false,
     },
