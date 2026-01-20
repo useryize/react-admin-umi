@@ -1,16 +1,25 @@
 import { Avatar, Tabs } from 'antd'
 import styles from './index.module.less'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useSetState } from 'ahooks'
 import AddIcon from '../icon/addIcon.svg'
 import DelectIcon from '../icon/delectIcon.svg'
 import { DownOutlined } from '@ant-design/icons'
 import classNames from 'classnames'
+import AddLabelModal from './addLabel'
+
+interface DimensionItem {
+  id: string
+  value: string
+}
+
 export default () => {
   const [state, setState] = useSetState<any>({
     singleTabskey: '',
     manyTabskey: '',
   })
+  const [modalVisible, setModalVisible] = useState(false)
+  const [dimensions, setDimensions] = useState<DimensionItem[]>([])
   const singleTabs = useMemo(() => {
     const list = [
       { label: '产品板块', key: '产品板块' },
@@ -49,7 +58,7 @@ export default () => {
         {item?.label}
         <div className='delectBox' onClick={(e) => {
           e.stopPropagation()
-        }}><Avatar size={18} src={DelectIcon} /></div>
+        }}><Avatar size={14} src={DelectIcon} /></div>
       </div>
     })
     return [...fiexList, ...list]
@@ -62,10 +71,20 @@ export default () => {
     </div>
   }
   const AddItemsContent = () => {
-    return <div className={styles.addBox}>
+    return <div
+      className={styles.addBox}
+      onClick={() => setModalVisible(true)}
+      style={{ cursor: 'pointer' }}
+    >
       <Avatar size={16} src={AddIcon} />
       <span className={styles.name} style={{ marginLeft: 6, color: '#3355FF' }}>新增维度</span>
     </div>
+  }
+
+  const handleConfirmDimensions = (newDimensions: DimensionItem[]) => {
+    setDimensions(newDimensions)
+    // 这里可以调用 API 保存数据
+    console.log('新增维度:', newDimensions)
   }
 
   return <div className={styles.labelBox}>
@@ -93,5 +112,12 @@ export default () => {
         />
       </div>
     </div>
+
+    <AddLabelModal
+      visible={modalVisible}
+      onClose={() => setModalVisible(false)}
+      onConfirm={handleConfirmDimensions}
+      availableDimensions={['产品板块产品板块产品板块', '产品名称', '区域类型', '行业', '业务区']}
+    />
   </div>
 }
