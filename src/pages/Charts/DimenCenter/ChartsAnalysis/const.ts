@@ -190,3 +190,15 @@ export const chartsData = {
     }
   ]
 }
+
+
+import { request } from '@umijs/max';
+
+// pre_经营画布_指标卡数据
+export async function getChartsData(data?: any) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(chartsData);
+    }, 3000);
+  });
+}
