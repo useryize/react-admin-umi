@@ -19,13 +19,15 @@
       .colorBox {
         display: flex;
         align-items: center;
+        gap: 10px;
 
         .item {
           display: flex;
           align-items: center;
           gap: 5px;
 
-          .color {
+          .color,
+          .colorWarning {
             width: 16px;
             height: 16px;
             border-radius: 4px;
@@ -33,6 +35,12 @@
             box-sizing: border-box;
             border: 1px solid;
             border-image: linear-gradient(170deg, rgba(255, 96, 46, 0.05) 14%, rgba(255, 96, 46, 0.12) 143%) 1;
+          }
+
+          .colorWarning {
+
+            background: linear-gradient(167deg, rgba(252, 32, 32, 0.2) -200%, rgba(255, 169, 143, 0.1) 101%), #FFFFFF;
+            border-image: linear-gradient(170deg, rgba(250, 88, 39, 0.05) 14%, rgba(252, 89, 39, 0.12) 143%) 1;
           }
 
           .text {
@@ -58,6 +66,183 @@
 
   .graphBox {
     width: 100%;
-    height: 300px;
+    position: relative;
+
+    .loading {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .navBox {
+      width: 100%;
+      overflow-x: auto;
+      margin: 16px 0 8px 0;
+
+      &::-webkit-scrollbar {
+        width: 0px;
+        /*滚动条宽度*/
+        height: 0px;
+        /*滚动条高度*/
+        background-color: transparent;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+
+
+
+        .item {
+          width: 245px;
+          border-radius: 4px;
+          background: #F5F7FA;
+          text-align: center;
+          line-height: 32px;
+          height: 32px;
+          flex-shrink: 0;
+          flex-grow: 0;
+        }
+      }
+
+
+
+    }
+
+    .graph {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      overflow: auto;
+
+      &::-webkit-scrollbar {
+        width: 6px;
+        /*滚动条宽度*/
+        height: 6px;
+        /*滚动条高度*/
+        background-color: rgba(20, 18, 34, 0.03);
+        /*滚动条拖拽块背景色*/
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(20, 18, 34, 0.05);
+        /*滚动条拖拽块背景色*/
+        border-radius: 3px;
+        /*滚动条拖拽块圆角*/
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: none;
+        /*滚动条拖拽块鼠标悬停背景色*/
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: transparent;
+        /*滚动条轨道背景色*/
+      }
+
+      &::-webkit-scrollbar-track:hover {
+        background-color: transparent;
+        /*滚动条轨道鼠标悬停背景色*/
+      }
+
+      .graphItem {
+
+        border-radius: 8px;
+        padding: 12px;
+        position: relative;
+        flex: 1;
+        background-color: #FAFAFA;
+        border: #FAFAFA solid 3px;
+        width: 245px;
+        height: 110px;
+
+
+
+        .rightIcon {
+          position: absolute;
+          right: 12px;
+          top: 14px;
+          background-repeat: no-repeat;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+
+          :global {
+            .ant-avatar {
+              cursor: pointer;
+            }
+          }
+
+        }
+
+        .title {
+          display: flex;
+          align-items: center;
+
+          span {
+            font-family: Source Han Sans CN Medium;
+            font-size: 14px;
+            color: #141222;
+            margin-right: 4px;
+          }
+        }
+
+        .valueBox {
+          display: flex;
+          align-items: center;
+          margin: 4px 0 5px 0;
+          gap: 5px 8px;
+          width: 100%;
+          flex-wrap: wrap;
+
+          .value {
+            font-family: DIN Pro Bold;
+            font-size: 24px;
+            color: #141222;
+            flex-grow: 0;
+            flex-shrink: 0;
+
+            span {
+              font-family: Source Han Sans CN Medium;
+              font-size: 14px;
+              color: #141222;
+              margin-left: 2px;
+            }
+          }
+        }
+
+        .numberBox {
+          display: flex;
+          align-items: center;
+          gap: 5px 16px;
+          position: relative;
+          width: 100%;
+          flex-wrap: wrap;
+
+          .number {
+            font-family: Source Han Sans CN;
+            font-size: 12px;
+            color: #838390;
+            flex-grow: 0;
+            flex-shrink: 0;
+
+            .num {
+              font-family: DIN Pro Regular;
+              font-size: 14px;
+              color: #141222;
+              margin-left: 3px;
+            }
+          }
+        }
+
+      }
+    }
   }
 }
